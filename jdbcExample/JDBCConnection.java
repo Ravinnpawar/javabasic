@@ -1,9 +1,6 @@
 package jdbcExample;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 //Connection is Interface to make a connection with db.- It contains some statements- PreparedStatement and DatabaseMetadata.
 //con.createStatement();
@@ -33,13 +30,52 @@ public class JDBCConnection {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/studentdb","root","root");
+                    "jdbc:mysql://localhost:3306/schooldb","root","root");
             //here studentdb is database name, root is username and password
+
+/*
+            String sql="SELECT * FROM schools where id=1";
             Statement stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("select * from student");
+            ResultSet rs=stmt.executeQuery(sql);
+            //stmt.executeQuery(sql);
             while(rs.next())
                 System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+
+*/
+
+            //To insert data into table
+           /* String sql = "insert into schools (id, schoolname, address)" + " values (?,?,?)";
+
+            PreparedStatement stmt=con.prepareStatement(sql);
+            stmt.setInt(1,4);
+            stmt.setString(2,"SGK");
+            stmt.setString(3,"Pune");
+            stmt.execute();
+
+            System.out.println("Value inserted.");*/
+            //To Update table data
+            /*String sql = "update schools set schoolname=? where id =?";
+
+            PreparedStatement stmt=con.prepareStatement(sql);
+            stmt.setString(1,"Garware");
+            stmt.setInt(2,2);
+            stmt.executeUpdate();
+
+
+            System.out.println("updated");*/
+
+            String sql = "delete from schools"+ "where name=?";
+            /*Statement statement=con.createStatement();
+            statement.executeUpdate(sql);*/
+
+            PreparedStatement stmt=con.prepareStatement(sql);
+            //stmt.setString(1,"Garware");
+            stmt.setString(2,"Garware");
+            stmt.executeUpdate();
+
+
+            System.out.println("updated");
             con.close();
-        }catch(Exception e){ System.out.println(e);}
+        }catch(Exception e){ System.out.println(e.getMessage());}
 }
 }

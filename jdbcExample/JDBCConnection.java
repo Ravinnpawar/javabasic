@@ -44,7 +44,7 @@ public class JDBCConnection {
 */
 
             //To insert data into table
-           /* String sql = "insert into schools (id, schoolname, address)" + " values (?,?,?)";
+          /*  String sql = "insert into schools (id, schoolname, address)" + " values (?,?,?)";
 
             PreparedStatement stmt=con.prepareStatement(sql);
             stmt.setInt(1,4);
@@ -52,7 +52,9 @@ public class JDBCConnection {
             stmt.setString(3,"Pune");
             stmt.execute();
 
-            System.out.println("Value inserted.");*/
+            System.out.println("Value inserted.");
+*/
+
             //To Update table data
             /*String sql = "update schools set schoolname=? where id =?";
 
@@ -64,16 +66,12 @@ public class JDBCConnection {
 
             System.out.println("updated");*/
 
-            String sql = "delete from schools"+ "where name=?";
-            /*Statement statement=con.createStatement();
-            statement.executeUpdate(sql);*/
 
+            //Delete Query MySQL.
+            String sql = "delete from schools where id=?";
             PreparedStatement stmt=con.prepareStatement(sql);
-            //stmt.setString(1,"Garware");
-            stmt.setString(2,"Garware");
+            stmt.setInt(1,1);
             stmt.executeUpdate();
-
-
             System.out.println("updated");
             con.close();
         }catch(Exception e){ System.out.println(e.getMessage());}
